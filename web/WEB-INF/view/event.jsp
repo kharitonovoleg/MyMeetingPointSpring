@@ -73,7 +73,7 @@
         <c:forEach items="${listEvent}" var="event">
             <tr>
                 <td>${event.id}</td>
-                <td><a href="<c:url value='/event/eventsdata/${event.id}' />" target="_blank">${event.eventName}</a></td>
+                <td><a href="<c:url value='/eventsdata/${event.id}' />" target="_blank">${event.eventName}</a></td>
                 <td>${event.mobilePhone}</td>
                 <td><a href="<c:url value='/event/update/${event.id}' />">Edit</a></td>
                 <td><a href="<c:url value='/event/remove/${event.id}' />">Delete</a></td>

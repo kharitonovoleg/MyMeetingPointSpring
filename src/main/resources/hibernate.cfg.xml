@@ -13,7 +13,7 @@
 
         <mapping class="by.kharitonov.model.User"/>
         <mapping class="by.kharitonov.model.News"/>
-        <mapping class="by.kharitonov.model.Role"/>
+        <!--<mapping class="by.kharitonov.model.Role"/>-->
         <mapping class="by.kharitonov.model.User"/>
         <mapping class="by.kharitonov.model.Event"/>
 

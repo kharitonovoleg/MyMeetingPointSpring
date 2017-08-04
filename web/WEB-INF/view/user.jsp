@@ -74,7 +74,7 @@
         <c:forEach items="${listUser}" var="user">
             <tr>
                 <td>${user.id}</td>
-                <td><a href="<c:url value='/user/usersdata/${user.id}' />" target="_blank">${user.firstName}</a></td>
+                <td><a href="<c:url value='/usersdata/${user.id}' />" target="_blank">${user.firstName}</a></td>
                 <td>${user.secondName}</td>
                 <td>${user.email}</td>
                 <td><a href="<c:url value='/user/update/${user.id}' />">Edit</a></td>

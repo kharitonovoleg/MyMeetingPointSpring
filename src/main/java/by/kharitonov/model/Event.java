@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
 import java.util.Arrays;
+import java.util.Set;
 
 @Entity
 @Table(name = "event")
@@ -15,6 +16,9 @@ public class Event {
 
     @Column(name = "eventName")
     private String eventName;
+
+    @ManyToMany(mappedBy = "events")
+    private Set<User> users;
 
 //    @Column(name = "text")
 //    private byte[] text;
@@ -60,6 +64,14 @@ public class Event {
 
     public void setEventName(String eventName) {
         this.eventName = eventName;
+    }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
 //    public byte[] getText() {

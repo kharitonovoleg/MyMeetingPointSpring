@@ -26,10 +26,10 @@ public class User {
     private String email;
 
 
-//    @ManyToMany
-//    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
-//            inverseJoinColumns = @JoinColumn(name = "role_id"))
-//    private Set<Role> roles;
+    @ManyToMany
+    @JoinTable(name = "users_events", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private Set<Event> events;
 
     public int getId() {
         return id;
@@ -87,13 +87,13 @@ public class User {
 //        this.confirmPassword = confirmPassword;
 //    }
 //
-//    public Set<Role> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(Set<Role> roles) {
-//        this.roles = roles;
-//    }
+    public Set<Event> getEvents() {
+        return events;
+    }
+
+    public void setEvents(Set<Event> roles) {
+        this.events = events;
+    }
 
     @Override
     public boolean equals(Object o) {

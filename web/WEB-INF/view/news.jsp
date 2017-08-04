@@ -73,7 +73,7 @@
         <c:forEach items="${listNews}" var="news">
             <tr>
                 <td>${news.id}</td>
-                <td><a href="<c:url value='/news/newsdata/${news.id}' />" target="_blank">${news.header}</a></td>
+                <td><a href="<c:url value='/newsdata/${news.id}' />" target="_blank">${news.header}</a></td>
                 <td>${news.text}</td>
                 <td><a href="<c:url value='/news/update/${news.id}' />">Edit</a></td>
                 <td><a href="<c:url value='/news/remove/${news.id}' />">Delete</a></td>
