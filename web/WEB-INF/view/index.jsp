@@ -3,19 +3,27 @@
 <html>
 <head>
     <title>Index</title>
+    
+    
+    
 </head>
 <body>
 <h3>Kharitonov presents</h3>
 <br/>
-<a href="<c:url value="/user"/>" target="_blank">Users list</a>
+<a href="<c:url value="/user"/>" >Users list</a>
 <br/>
 
 <br/>
-<a href="<c:url value="/event"/>" target="_blank">Event list</a>
+<a href="<c:url value="/event"/>" >Event list</a>
 <br/>
 
 <br/>
-<a href="<c:url value="/news"/>" target="_blank">News list</a>
+<a href="<c:url value="/news"/>" >News list</a>
 <br/>
+
+<br/>
+<a href="<c:url value="/usereventlist"/>" >Users event list</a>
+<br/>
+
 </body>
 </html>

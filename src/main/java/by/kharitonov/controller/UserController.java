@@ -1,6 +1,8 @@
 package by.kharitonov.controller;
 
+import by.kharitonov.model.Event;
 import by.kharitonov.model.User;
+import by.kharitonov.service.EventService;
 import by.kharitonov.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,11 +16,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class UserController {
     private UserService userService;
+    private EventService eventService;
 
     @Autowired(required = true)
     @Qualifier(value = "userService")
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired(required = true)
+    @Qualifier(value = "eventService")
+    public void setEventService(EventService eventService) {
+        this.eventService = eventService;
     }
 
     @RequestMapping(value = "/user", method = RequestMethod.GET)
@@ -59,6 +68,15 @@ public class UserController {
         model.addAttribute("user", this.userService.getUserById(id));
 
         return "usersdata";
+    }
+
+    @RequestMapping(value = "/usereventlist")
+    public String usereventlist(Model model){
+        model.addAttribute("user", new User());
+        model.addAttribute("event", new Event());
+        model.addAttribute("listEvent", this.eventService.listEvent());
+        model.addAttribute("listUser", this.userService.listUser());
+        return "usereventlist";
     }
 }
 

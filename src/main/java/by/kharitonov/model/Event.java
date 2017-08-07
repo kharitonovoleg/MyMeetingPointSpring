@@ -1,24 +1,32 @@
 package by.kharitonov.model;
 
+import org.hibernate.annotations.Type;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "event")
 public class Event {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name = "eventName")
     private String eventName;
 
-    @ManyToMany(mappedBy = "events")
-    private Set<User> users;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_events", joinColumns = @JoinColumn(name = "event_id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id"))
+    private List<User> users;
 
 //    @Column(name = "text")
 //    private byte[] text;
@@ -44,11 +52,12 @@ public class Event {
 //    @Column(name = "phone")
 //    private String phone;
 //
-//    @Column(name = "eventStartTime")
-//    private Time eventStartTime;
-//
-//    @Column(name = "date")
-//    private Date date;
+
+    @Column(name = "eventStartTime")
+    private Time eventStartTime;
+
+    @Column(name = "date")
+    private Date date;
 
     public int getId() {
         return id;
@@ -66,11 +75,11 @@ public class Event {
         this.eventName = eventName;
     }
 
-    public Set<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Set<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 
@@ -138,21 +147,23 @@ public class Event {
 //        this.phone = phone;
 //    }
 //
-//    public Time getEventStartTime() {
-//        return eventStartTime;
-//    }
-//
-//    public void setEventStartTime(Time eventStartTime) {
-//        this.eventStartTime = eventStartTime;
-//    }
-//
-//    public Date getDate() {
-//        return date;
-//    }
-//
-//    public void setDate(Date date) {
-//        this.date = date;
-//    }
+
+    public Time getEventStartTime() {
+        return eventStartTime;
+    }
+
+    public void setEventStartTime(Time eventStartTime) {
+        this.eventStartTime = eventStartTime;
+    }
+
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -20,15 +20,26 @@ public class EventDaoImpl implements EventDao{
 
     @Override
     public void addEvent(Event event) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.persist(event);
+        Session session = this.sessionFactory.openSession();
+        session.beginTransaction();
+        session.saveOrUpdate(event);
+        session.getTransaction().commit();
+        session.flush();
+        session.close();
         logger.info("Event successfully saved. Event details: " + event);
     }
 
     @Override
     public void updateEvent(Event event) {
-        Session session = this.sessionFactory.getCurrentSession();
-        session.update(event);
+        Session session = this.sessionFactory.openSession();
+        session.beginTransaction();
+        Event event1 = (Event) session.get(Event.class, event.getId());
+        event1.setEventName(event.getEventName());
+        event1.setMobilePhone(event.getMobilePhone());
+        session.saveOrUpdate(event1);
+        session.getTransaction().commit();
+        session.flush();
+        session.close();
         logger.info("Event successfully update. Event details: " + event);
 
     }

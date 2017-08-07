@@ -1,13 +1,13 @@
 package by.kharitonov.model;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
 //    @Column(name = "username")
@@ -26,10 +26,10 @@ public class User {
     private String email;
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_events", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id"))
-    private Set<Event> events;
+    private List<Event> events;
 
     public int getId() {
         return id;
@@ -87,11 +87,11 @@ public class User {
 //        this.confirmPassword = confirmPassword;
 //    }
 //
-    public Set<Event> getEvents() {
+    public List<Event> getEvents() {
         return events;
     }
 
-    public void setEvents(Set<Event> roles) {
+    public void setEvents(List<Event> events) {
         this.events = events;
     }
 

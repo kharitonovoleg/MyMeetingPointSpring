@@ -4,9 +4,38 @@
 <%@ taglib prefix="from" uri="http://www.springframework.org/tags/form" %>
 <%@ page session="false" %>
 
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
+
 <html>
 <head>
+
     <title>Event Page</title>
+
+    <link href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="screen"
+          href="http://tarruda.github.com/bootstrap-datetimepicker/assets/css/bootstrap-datetimepicker.min.css">
+    <script type="text/javascript"
+            src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js">
+    </script>
+    <script type="text/javascript"
+            src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js">
+    </script>
+    <script type="text/javascript"
+            src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js">
+    </script>
+    <script type="text/javascript"
+            src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.pt-BR.js">
+    </script>
+
+
+    <%--<script type="text/javascript" src="${contextPath}/resources/js/jquery-1.11.1.min.js"></script>--%>
+    <%--<script type="text/javascript" src="${contextPath}/resources/js/moment-with-locales.min.js"></script>--%>
+    <%--<script type="text/javascript" src="${contextPath}/resources/js/bootstrap.min.js"></script>--%>
+    <%--<script type="text/javascript" src="${contextPath}/resources/js/bootstrap-datetimepicker.min.js"></script>--%>
+
+    <%--<link href="${contextPath}/resources/css/bootstrap.min.css" rel="stylesheet">--%>
+    <%--<link href="${contextPath}/resources/css/bootstrap-datetimepicker.min.css" rel="stylesheet">--%>
 
     <style type="text/css">
         .tg {
@@ -50,6 +79,9 @@
 
 <body>
 
+
+<%--<input type="text" class="form-control" id="datetimepicker2">--%>
+
 <a href="/">Back to main menu</a>
 
 <br/>
@@ -60,6 +92,7 @@
 
 <br/>
 <br/>
+
 
 <c:if test="${!empty listEvent}">
     <table class="tg">
@@ -123,6 +156,52 @@
             </td>
         </tr>
 
+        <div class="well">
+            <div id="datetimepicker4" class="input-append">
+                <input data-format="yyyy-MM-dd" type="text" name="date"></input>
+                <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      </i>
+    </span>
+            </div>
+        </div>
+
+
+        <div class="well">
+            <div id="datetimepicker3" class="input-append">
+                <input data-format="hh:mm:ss" type="text" name="eventStartTime"></input>
+                <span class="add-on">
+      <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+      </i>
+    </span>
+            </div>
+        </div>
+
+
+            <%--<tr>--%>
+            <%--<td>--%>
+            <%--<input name="date" type="date">--%>
+            <%--</td>--%>
+            <%--</tr>--%>
+
+            <%--<tr>--%>
+            <%--<td>--%>
+            <%--<input name="eventStartTime" type="text">--%>
+            <%--</td>--%>
+            <%--</tr>--%>
+            <%--<tr>--%>
+            <%--<td>--%>
+            <%--<div class="form-group">--%>
+            <%--<div class="input-group date" id="datetimepicker1">--%>
+            <%--<input type="text" name="date" class="form-control"/>--%>
+            <%--<span class="input-group-addon">--%>
+            <%--<span class="glyphicon-calendar glyphicon"></span>--%>
+            <%--</span>--%>
+            <%--</div>--%>
+            <%--</div>--%>
+            <%--</td>--%>
+            <%--</tr>--%>
+
         <tr>
             <td colspan="2">
                 <c:if test="${!empty event.eventName}">
@@ -135,7 +214,38 @@
                 </c:if>
             </td>
         </tr>
+
+
     </table>
 </form:form>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker4').datetimepicker({
+            pickTime: false
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker3').datetimepicker({
+            pickDate: false
+        });
+    });
+</script>
+
+<%--<script type="text/javascript">--%>
+<%--$(function () {--%>
+<%--$('#datetimepicker1').datetimepicker({--%>
+<%--language: 'eng',--%>
+<%--minuteStepping: 10,--%>
+<%--defaultDate: "09.01.2015",--%>
+<%--daysOfWeekDisabled: [0, 6]--%>
+<%--});--%>
+<%--$('#datetimepicker2').datetimepicker({language: 'ru'});--%>
+<%--});--%>
+<%--</script>--%>
+
 </body>
 </html>
