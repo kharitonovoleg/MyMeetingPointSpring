@@ -100,6 +100,8 @@
             <th width="80">ID</th>
             <th width="120">Event Name</th>
             <th width="120">Mobile phone</th>
+            <th width="80">Date</th>
+            <th width="80">Start Time</th>
             <th width="60">Edit</th>
             <th width="60">Delete</th>
         </tr>
@@ -108,6 +110,8 @@
                 <td>${event.id}</td>
                 <td><a href="<c:url value='/eventsdata/${event.id}' />" target="_blank">${event.eventName}</a></td>
                 <td>${event.mobilePhone}</td>
+                <td>${event.date}</td>
+                <td>${event.eventStartTime}</td>
                 <td><a href="<c:url value='/event/update/${event.id}' />">Edit</a></td>
                 <td><a href="<c:url value='/event/remove/${event.id}' />">Delete</a></td>
 
@@ -158,7 +162,7 @@
 
         <div class="well">
             <div id="datetimepicker4" class="input-append">
-                <input data-format="yyyy-MM-dd" type="text" name="date"></input>
+                <form:input data-format="yyyy-MM-dd" type="text" name="date" path="date"></form:input>
                 <span class="add-on">
       <i data-time-icon="icon-time" data-date-icon="icon-calendar">
       </i>
@@ -169,7 +173,7 @@
 
         <div class="well">
             <div id="datetimepicker3" class="input-append">
-                <input data-format="hh:mm:ss" type="text" name="eventStartTime"></input>
+                <form:input data-format="hh:mm:ss" type="text" name="eventStartTime" path="eventStartTime"></form:input>
                 <span class="add-on">
       <i data-time-icon="icon-time" data-date-icon="icon-calendar">
       </i>

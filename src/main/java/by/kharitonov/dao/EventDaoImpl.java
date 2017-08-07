@@ -36,6 +36,8 @@ public class EventDaoImpl implements EventDao{
         Event event1 = (Event) session.get(Event.class, event.getId());
         event1.setEventName(event.getEventName());
         event1.setMobilePhone(event.getMobilePhone());
+        event1.setEventStartTime(event.getEventStartTime());
+        event1.setDate(event.getDate());
         session.saveOrUpdate(event1);
         session.getTransaction().commit();
         session.flush();
