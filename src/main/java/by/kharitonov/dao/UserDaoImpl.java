@@ -1,12 +1,15 @@
 package by.kharitonov.dao;
 
+import by.kharitonov.model.Role;
 import by.kharitonov.model.User;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -15,15 +18,33 @@ public class UserDaoImpl implements UserDao {
 
     private static final Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
     private SessionFactory sessionFactory;
+    private RoleDao roleDao;
+
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
+    }
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
     }
 
     @Override
+    public User findByUsername(String username) {
+        Session session = this.sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from User where username=:username");
+        query.setParameter("username", username);
+        User user = (User) query.uniqueResult();
+        return user;
+    }
+
+    @Override
     public void addUser(User user) {
         Session session = this.sessionFactory.openSession();
         session.beginTransaction();
+        Role role = roleDao.getById(2);
+        List<Role> list = new ArrayList<>();
+        list.add(role);
+        user.setRoles(list);
         session.saveOrUpdate(user);
         session.getTransaction().commit();
         session.flush();

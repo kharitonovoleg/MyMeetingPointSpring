@@ -78,5 +78,6 @@ public class UserController {
         model.addAttribute("listUser", this.userService.listUser());
         return "usereventlist";
     }
+
 }
 

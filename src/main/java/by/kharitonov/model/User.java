@@ -10,8 +10,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-//    @Column(name = "username")
-//    private String username;
+    @Column(name = "username")
+    private String username;
 
     @Column(name = "firstName")
     private String firstName;
@@ -19,9 +19,9 @@ public class User {
     @Column(name = "secondName")
     private String secondName;
 
-//    @Column(name = "password")
-//    private String password;
-//
+    @Column(name = "password")
+    private String password;
+
     @Column(name = "email")
     private String email;
 
@@ -31,6 +31,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "event_id"))
     private List<Event> events;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<Role> roles;
+
     public int getId() {
         return id;
     }
@@ -39,13 +44,13 @@ public class User {
         this.id = id;
     }
 
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -63,14 +68,14 @@ public class User {
         this.secondName = secondName;
     }
 
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -93,6 +98,14 @@ public class User {
 
     public void setEvents(List<Event> events) {
         this.events = events;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
     @Override

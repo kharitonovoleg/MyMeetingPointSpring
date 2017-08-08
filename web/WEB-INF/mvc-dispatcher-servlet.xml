@@ -37,6 +37,7 @@
                 <value>by.kharitonov.model.User</value>
                 <value>by.kharitonov.model.News</value>
                 <value>by.kharitonov.model.Event</value>
+                <value>by.kharitonov.model.Role</value>
             </list>
         </property>
         <property name="hibernateProperties">
