@@ -25,6 +25,8 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Transient
+    private String confirmPassword;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_events", joinColumns = @JoinColumn(name = "user_id"),
@@ -83,15 +85,15 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
-//
-//    public String getConfirmPassword() {
-//        return confirmPassword;
-//    }
-//
-//    public void setConfirmPassword(String confirmPassword) {
-//        this.confirmPassword = confirmPassword;
-//    }
-//
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
     public List<Event> getEvents() {
         return events;
     }

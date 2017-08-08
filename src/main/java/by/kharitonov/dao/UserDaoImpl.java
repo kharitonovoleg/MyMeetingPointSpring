@@ -39,16 +39,8 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        Session session = this.sessionFactory.openSession();
-        session.beginTransaction();
-        Role role = roleDao.getById(2);
-        List<Role> list = new ArrayList<>();
-        list.add(role);
-        user.setRoles(list);
+        Session session = this.sessionFactory.getCurrentSession();
         session.saveOrUpdate(user);
-        session.getTransaction().commit();
-        session.flush();
-        session.close();
         logger.info("User successfully saved. User details: " + user);
     }
 

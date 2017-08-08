@@ -55,6 +55,7 @@
 
     <bean id="userService" class="by.kharitonov.service.UserServiceImpl">
         <property name="userDao" ref="userDao"/>
+        <property name="roleDao" ref="roleDao"/>
     </bean>
 
     <bean id="eventDao" class="by.kharitonov.dao.EventDaoImpl">
@@ -71,6 +72,10 @@
 
     <bean id="newsService" class="by.kharitonov.service.NewsServiceImpl">
         <property name="newsDao" ref="newsDao"/>
+    </bean>
+
+    <bean id="roleDao" class="by.kharitonov.dao.RoleDaoImpl">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
