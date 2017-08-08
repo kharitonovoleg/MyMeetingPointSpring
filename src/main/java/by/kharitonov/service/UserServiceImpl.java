@@ -18,6 +18,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
+    public User findByUsername(String username) {
+        return this.userDao.findByUsername(username);
+    }
+
+    @Override
+    @Transactional
     public void addUser(User user) {
         this.userDao.addUser(user);
     }
