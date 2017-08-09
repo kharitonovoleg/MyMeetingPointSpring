@@ -1,5 +1,6 @@
 package by.kharitonov.controller;
 
+import by.kharitonov.model.Event;
 import by.kharitonov.model.User;
 import by.kharitonov.service.SecurityServiceImpl;
 import by.kharitonov.service.UserService;
@@ -29,10 +30,13 @@ public class GeneralController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index(){
+    public String index(Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = this.userService.findByUsername(
                 ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername());
+        model.addAttribute("user", user);
+        model.addAttribute("event", new Event());
+        model.addAttribute("eventList", user.getEvents());
         return "index";
     }
 
@@ -51,7 +55,6 @@ public class GeneralController {
 
     @RequestMapping(value = "/registration", method = RequestMethod.POST)
     public String registration(@ModelAttribute("userForm") User userForm, BindingResult bindingResult, Model model) {
-//        userValidator.validate(userForm, bindingResult);
 
         if (bindingResult.hasErrors()) {
             return "registration";

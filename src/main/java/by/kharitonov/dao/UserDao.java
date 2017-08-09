@@ -1,11 +1,14 @@
 package by.kharitonov.dao;
 
 
+import by.kharitonov.model.Event;
 import by.kharitonov.model.User;
 
 import java.util.List;
 
 public interface UserDao {
+
+    void addUserEvent(Event event);
 
     User findByUsername(String username);
 

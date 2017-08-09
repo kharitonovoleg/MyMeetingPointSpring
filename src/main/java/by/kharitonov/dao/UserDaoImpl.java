@@ -1,5 +1,6 @@
 package by.kharitonov.dao;
 
+import by.kharitonov.model.Event;
 import by.kharitonov.model.Role;
 import by.kharitonov.model.User;
 import org.hibernate.Query;
@@ -28,6 +29,7 @@ public class UserDaoImpl implements UserDao {
         this.sessionFactory = sessionFactory;
     }
 
+
     @Override
     public User findByUsername(String username) {
         Session session = this.sessionFactory.getCurrentSession();
@@ -39,8 +41,12 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public void addUser(User user) {
-        Session session = this.sessionFactory.getCurrentSession();
+        Session session = this.sessionFactory.openSession();
+        session.beginTransaction();
         session.saveOrUpdate(user);
+        session.getTransaction().commit();
+        session.flush();
+        session.close();
         logger.info("User successfully saved. User details: " + user);
     }
 
@@ -52,6 +58,7 @@ public class UserDaoImpl implements UserDao {
         user1.setFirstName(user.getFirstName());
         user1.setSecondName(user.getSecondName());
         user1.setEmail(user.getEmail());
+        user1.setEvents(user.getEvents());
         session.saveOrUpdate(user1);
         session.getTransaction().commit();
         session.flush();
@@ -92,6 +99,11 @@ public class UserDaoImpl implements UserDao {
         return usersList;
     }
 
+
+    @Override
+    public void addUserEvent(Event event) {
+
+    }
 
 
 }
