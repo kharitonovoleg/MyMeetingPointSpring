@@ -44,7 +44,7 @@ public class UserServiceImpl implements UserService {
         List<Role> roles = new ArrayList<>();
         roles.add(roleDao.getById(2));
         user.setRoles(roles);
-        userDao.addUser(user);
+        this.userDao.addUser(user);
     }
 
     @Override

@@ -103,7 +103,7 @@
 </form>
 
 <br/>
-<security:authorize access="hasRole('ROLE_ADMIN')">
+<%--<security:authorize access="hasRole('ROLE_ADMIN')">--%>
     <a href="<c:url value="/user"/>">Users list</a>
     <br/>
 
@@ -118,6 +118,6 @@
     <br/>
     <a href="<c:url value="/usereventlist"/>">Users event list</a>
     <br/>
-</security:authorize>
+<%--</security:authorize>--%>
 </body>
 </html>
