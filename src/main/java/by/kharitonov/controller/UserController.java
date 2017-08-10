@@ -89,7 +89,6 @@ public class UserController {
         User user = this.userService.findByUsername(
                 ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername());
 
-
         eventService.addEvent(event);
 
         List<Event> list = user.getEvents();

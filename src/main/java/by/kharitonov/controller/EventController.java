@@ -1,9 +1,13 @@
 package by.kharitonov.controller;
 
 import by.kharitonov.model.Event;
+import by.kharitonov.model.User;
 import by.kharitonov.service.EventService;
+import by.kharitonov.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,10 +15,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 public class EventController {
 
     private EventService eventService;
+    private UserService userService;
+
+    @Autowired(required = true)
+    @Qualifier(value = "userService")
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
 
     @Autowired(required = true)
     @Qualifier(value = "eventService")
@@ -41,14 +55,14 @@ public class EventController {
     }
 
     @RequestMapping("/event/remove/{id}")
-    public String removeEvent(@PathVariable("id") int id){
+    public String removeEvent(@PathVariable("id") int id) {
         this.eventService.removeEvent(id);
 
         return "redirect:/event";
     }
 
     @RequestMapping("/event/update/{id}")
-    public String updateEvent(@PathVariable("id") int id, Model model){
+    public String updateEvent(@PathVariable("id") int id, Model model) {
         model.addAttribute("event", this.eventService.getEventById(id));
         model.addAttribute("listEvent", this.eventService.listEvent());
 
@@ -56,9 +70,35 @@ public class EventController {
     }
 
     @RequestMapping("eventsdata/{id}")
-    public String eventData(@PathVariable("id") int id, Model model){
+    public String eventData(@PathVariable("id") int id, Model model) {
         model.addAttribute("event", this.eventService.getEventById(id));
-
         return "eventsdata";
     }
+
+    @RequestMapping("/myevent/remove/{id}")
+    public String removeMyEvent(@ModelAttribute Event event, @PathVariable("id") int id){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = this.userService.findByUsername(
+                ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername());
+        List<Event> myEventList = user.getEvents();
+        myEventList.remove(eventService.getEventById(id));
+        user.setEvents(myEventList);
+        userService.updateUser(user);
+        return "redirect:/";
+    }
+
+//    @RequestMapping("/myevent/update/{id}")
+//    public String updateMyEvent(@ModelAttribute("event") Event myevent, @PathVariable("id") int id, Model model) {
+//        model.addAttribute("myevent", this.eventService.getEventById(id));
+//        model.addAttribute("listEvent", this.eventService.listEvent());
+//
+//        if (myevent.getId() == 0) {
+//            this.eventService.addEvent(myevent);
+//        } else {
+//            this.eventService.updateEvent(myevent);
+//        }
+//
+//        return "eventeditor";
+//    }
+
 }
