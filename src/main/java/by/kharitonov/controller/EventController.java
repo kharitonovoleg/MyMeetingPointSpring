@@ -87,18 +87,16 @@ public class EventController {
         return "redirect:/";
     }
 
-//    @RequestMapping("/myevent/update/{id}")
-//    public String updateMyEvent(@ModelAttribute("event") Event myevent, @PathVariable("id") int id, Model model) {
-//        model.addAttribute("myevent", this.eventService.getEventById(id));
-//        model.addAttribute("listEvent", this.eventService.listEvent());
-//
-//        if (myevent.getId() == 0) {
-//            this.eventService.addEvent(myevent);
-//        } else {
-//            this.eventService.updateEvent(myevent);
-//        }
-//
-//        return "eventeditor";
-//    }
+    @RequestMapping("/myevent/add/{id}")
+    public String updateMyEvent(@ModelAttribute Event event, @PathVariable("id") int id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = this.userService.findByUsername(
+                ((org.springframework.security.core.userdetails.User) auth.getPrincipal()).getUsername());
+        List<Event> myEventList = user.getEvents();
+        myEventList.add(eventService.getEventById(id));
+        user.setEvents(myEventList);
+        userService.updateUser(user);
+        return "redirect:/";
+    }
 
 }

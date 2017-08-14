@@ -1,5 +1,6 @@
 package by.kharitonov.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -9,7 +10,6 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.List;
 
 @Entity
@@ -23,6 +23,7 @@ public class Event {
     @Column(name = "eventName")
     private String eventName;
 
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_events", joinColumns = @JoinColumn(name = "event_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
@@ -205,5 +206,17 @@ public class Event {
 //        result = 31 * result + (eventStartTime != null ? eventStartTime.hashCode() : 0);
 //        result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "id=" + id +
+                ", eventName='" + eventName + '\'' +
+                ", users=" + users +
+                ", mobilePhone='" + mobilePhone + '\'' +
+                ", eventStartTime=" + eventStartTime +
+                ", date=" + date +
+                '}';
     }
 }

@@ -2,6 +2,7 @@ package by.kharitonov.controller;
 
 import by.kharitonov.model.Event;
 import by.kharitonov.model.User;
+import by.kharitonov.service.EventService;
 import by.kharitonov.service.SecurityServiceImpl;
 import by.kharitonov.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +19,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class GeneralController {
 
-    @Autowired
-    @Qualifier("userService")
+
     private UserService userService;
+    private EventService eventService;
+
+    @Autowired(required = true)
+    @Qualifier(value = "eventService")
+    public void setEventService(EventService eventService) {
+        this.eventService = eventService;
+    }
 
     @Autowired
     private SecurityServiceImpl securityServiceImpl;
 
+    @Autowired
+    @Qualifier("userService")
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
@@ -37,6 +46,7 @@ public class GeneralController {
         model.addAttribute("user", user);
         model.addAttribute("event", new Event());
         model.addAttribute("eventList", user.getEvents());
+        model.addAttribute("listEvent", this.eventService.listEvent());
         return "index";
     }
 

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+         xmlns:b="http://www.springframework.org/schema/beans"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security.xsd
+	http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <http auto-config="true">
+        <intercept-url pattern="/" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/>
+
+        <form-login login-page="/login"
+                    default-target-url="/"
+                    authentication-failure-url="/login?error"
+                    username-parameter="username"
+                    password-parameter="password"/>
+
+        <!--<logout logout-success-url="/login?logout"/>-->
+        <csrf disabled="true"/>
+    </http>
+
+    <authentication-manager alias="authenticationManager">
+        <authentication-provider user-service-ref="customUserDetailsServiceImpl">
+            <!--<user-service>-->
+                <!--<user name="admin" password="admin" authorities="ROLE_ADMIN" />-->
+            <!--</user-service>-->
+        </authentication-provider>
+    </authentication-manager>
+
+<!--<b:bean id="userDetailsServiceImpl" class="by.service.UserDetailsServiceImpl"/>-->
+</b:beans>

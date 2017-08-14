@@ -60,7 +60,7 @@ public class EventDaoImpl implements EventDao{
     @Override
     public Event getEventById(int id) {
         Session session = this.sessionFactory.getCurrentSession();
-        Event event = (Event) session.load(Event.class, new Integer(id));
+        Event event = (Event) session.get(Event.class, new Integer(id));
         logger.info("Event successfully loaded. Event details: " + event);
 
         return event;

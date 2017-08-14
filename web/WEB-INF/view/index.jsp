@@ -51,7 +51,8 @@
 <h3>My meeting point</h3>
 
 <table class="tg">
-    <tr>About user</tr><br/>
+    <tr>About user</tr>
+    <br/>
     <tr>
         <th width="80">ID</th>
         <th width="120">Username</th>
@@ -68,7 +69,8 @@
     </tr>
 </table>
 
-<tr>Users events</tr><br/>
+<tr>Users events</tr>
+<br/>
 <c:if test="${!empty eventList}">
     <table class="tg">
         <tr>
@@ -77,17 +79,17 @@
             <th width="120">Mobile phone</th>
             <th width="80">Date</th>
             <th width="80">Start Time</th>
-            <th width="60">Edit</th>
-            <th width="60">Delete</th>
+                <%--<th width="60">Edit</th>--%>
+            <th width="70">Delete</th>
         </tr>
         <c:forEach items="${eventList}" var="event">
             <tr>
                 <td>${event.id}</td>
-                <td><a href="<c:url value='/eventsdata/${event.id}' />" >${event.eventName}</a></td>
+                <td><a href="<c:url value='/eventsdata/${event.id}' />">${event.eventName}</a></td>
                 <td>${event.mobilePhone}</td>
                 <td>${event.date}</td>
                 <td>${event.eventStartTime}</td>
-                <td><a href="<c:url value='/myevent/update/${event.id}' />">Edit</a></td>
+                    <%--<td><a href="<c:url value='/myevent/update/${event.id}' />">Edit</a></td>--%>
                 <td><a href="<c:url value='/myevent/remove/${event.id}' />">Delete</a></td>
             </tr>
         </c:forEach>
@@ -95,12 +97,41 @@
 </c:if>
 
 
-
 <form action="/adduserevent">
     <input name="eventName">
     <input name="mobilePhone">
     <input type="submit" name="Add event">
 </form>
+</td>
+
+
+<tr>All events</tr>
+<br/>
+<c:if test="${!empty listEvent}">
+    <table class="tg">
+        <tr>
+            <th width="80">ID</th>
+            <th width="120">Event Name</th>
+            <th width="120">Mobile phone</th>
+            <th width="80">Date</th>
+            <th width="80">Start Time</th>
+            <th width="60">Add to my events</th>
+        </tr>
+        <c:forEach items="${listEvent}" var="event">
+            <tr>
+                <td>${event.id}</td>
+                <td><a href="<c:url value='/eventsdata/${event.id}' />" target="_blank">${event.eventName}</a>
+                </td>
+                <td>${event.mobilePhone}</td>
+                <td>${event.date}</td>
+                <td>${event.eventStartTime}</td>
+                <td><a href="<c:url value='/myevent/add/${event.id}' />">Add</a></td>
+            </tr>
+        </c:forEach>
+    </table>
+</c:if>
+
+</table>
 
 <br/>
 <security:authorize access="hasRole('ROLE_ADMIN')">
