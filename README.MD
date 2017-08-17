@@ -1,5 +1,5 @@
 # MyMeetingPoint. Web-приложение для организации встреч и планирования событий. 
-## используемые технологии: Spring, Hibernate, JSP, Apache TomCat, Maven, MySQL, Twitter Bootstrap
+## используемые технологии: Spring, Hibernate, JSP, Apache TomCat, Maven, MySQL, Twitter Bootstrap. RESTful Service.
 
 Минск 2017
 
