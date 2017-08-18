@@ -63,4 +63,10 @@ public class EventRestController {
         return new ResponseEntity<Event>(HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/event", method = RequestMethod.POST)
+    public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+        eventService.addEvent(event);
+        return new ResponseEntity<Event>(event, HttpStatus.OK);
+    }
+
 }
