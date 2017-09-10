@@ -9,8 +9,9 @@
 	http://www.springframework.org/schema/beans/spring-beans.xsd">
 
     <http auto-config="true">
-        <intercept-url pattern="/" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/event/**" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/" access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"/>
+        <!--<intercept-url pattern="/eventlistcontroller/**" access="hasRole('ROLE_ADMIN')"/>-->
 
         <form-login login-page="/login"
                     default-target-url="/"

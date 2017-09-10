@@ -28,6 +28,7 @@ public class User {
     @Transient
     private String confirmPassword;
 
+
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_events", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id"))

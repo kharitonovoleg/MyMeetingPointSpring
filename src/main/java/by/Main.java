@@ -51,6 +51,7 @@ public class Main {
             list.add(event);
             user.setEvents(list);
 
+
             session.save(event);
             session.saveOrUpdate(user);
             session.getTransaction().commit();
@@ -59,5 +60,9 @@ public class Main {
         } finally {
             session.close();
         }
+
+
     }
+
+
 }
